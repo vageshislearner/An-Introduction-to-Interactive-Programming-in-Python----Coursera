@@ -1,7 +1,5 @@
-# Rock-paper-scissors-lizard-Spock program
-
-import math
 import random
+import math
 
 # The key idea of this program is to equate the strings
 # "rock", "paper", "scissors", "lizard", "Spock" to numbers
@@ -15,7 +13,7 @@ import random
 
 # helper functions
 
-#assign name to given number
+# assign name to given number
 def name_to_number(name):
     if name == "rock":
         number = 0
@@ -25,11 +23,13 @@ def name_to_number(name):
         number = 2
     elif name == "lizard":
         number = 3
-    else:
+    elif name == "scissors":
         number = 4
+    else:
+        return None  # return None if the name is not recognized
     return number
 
-#assign number to given name
+# assign number to given name
 def number_to_name(number):
     if number == 0:
         name = "rock"
@@ -39,20 +39,25 @@ def number_to_name(number):
         name = "paper"
     elif number == 3:
         name = "lizard"
-    else:
+    elif number == 4:
         name = "scissors"
+    else:
+        return None  # return None if the number is not valid
     return name
-    
+
 
 def rpsls(player_choice):
     # print a blank line to separate consecutive games
-    print ""
+    print("")
     
     # print out the message for the player's choice
-    print "Player chooses " + player_choice
+    print(f"Player chooses {player_choice}")
     
     # convert the player's choice to player_number using the function name_to_number()
     player_number = name_to_number(player_choice)
+    if player_number is None:
+        print(f"Invalid choice: {player_choice}")
+        return
     
     # compute random guess for comp_number using random.randrange()
     computer_number = random.randrange(0, 5)
@@ -61,26 +66,24 @@ def rpsls(player_choice):
     computer_choice = number_to_name(computer_number)
     
     # print out the message for computer's choice
-    print "Computer chooses " + computer_choice
+    print(f"Computer chooses {computer_choice}")
     
     # compute difference of comp_number and player_number modulo five
-    difference = ((player_number - computer_number) % 5)
+    difference = (player_number - computer_number) % 5
     
     # use if/elif/else to determine winner, print winner message
     if difference == 1 or difference == 2:
-        print "Player wins!"
+        print("Player wins!")
     elif difference == 3 or difference == 4:
-        print "Computer wins!"
+        print("Computer wins!")
     else:
-        print "Player and computer tie!"
+        print("Player and computer tie!")
     return ""
-    
 
-# test your code - THESE CALLS MUST BE PRESENT IN YOUR SUBMITTED CODE
+
+# test the code
 rpsls("rock")
 rpsls("Spock")
 rpsls("paper")
 rpsls("lizard")
 rpsls("scissors")
-
-# always remember to check your completed program against the grading rubric
